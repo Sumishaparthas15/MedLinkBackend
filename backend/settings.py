@@ -2,15 +2,20 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+from dotenv import load_dotenv
+import dj_database_url
 
+
+# Load .env file
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-x)11r$nn*+^sqvwfv8mkky6=ygex5p4ilc%iw$km2e#4bi6l(v'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = ['*']  # Or restrict to Render domain later
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,6 +43,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,16 +133,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': "django.db.backends.postgresql",
+#         'NAME':"amwell2",
+#         "USER":"postgres",
+#         "PASSWORD":"123",
+#         "HOST":"localhost",
+#         "PORT":"5432"
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': "django.db.backends.postgresql",
-        'NAME':"amwell2",
-        "USER":"postgres",
-        "PASSWORD":"123",
-        "HOST":"localhost",
-        "PORT":"5432"
-    }
+    'default': dj_database_url.config(
+        default="sqlite:///db.sqlite3",  # fallback
+        conn_max_age=600,
+        ssl_require=False
+    )
 }
+
 CORS_ALLOW_ALL_ORIGINS = True 
 # CORS_ALLOW_CREDENTIALS = True
 
@@ -190,6 +204,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -205,11 +222,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sumishasudha392@gmail.com'
-EMAIL_HOST_PASSWORD = 'ebvd zdgw thrs sgsf'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-RAZORPAY_KEY_ID = 'rzp_test_d5VCv4MOwkIpcU'
-RAZORPAY_KEY_SECRET = 'OXxDDHSLPDiM9yvqbd1SAFdN'
+RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # You already have this
 SESSION_COOKIE_AGE = 60  # Set to 20 minutes (which should be enough)

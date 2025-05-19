@@ -9,7 +9,10 @@ from channels.security.websocket import AllowedHostsOriginValidator
 from django.urls import path
 from api.consumers import NotificationConsumer
 
+
+settings_module ='backend.deployment_settings' if 'RENDER_EXTERNAL_HOSTNAME' in os.environ else 'backend.settings'
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
