@@ -21,3 +21,4 @@ channels==4.0.0
 channels-redis==4.1.0
 celery==5.3.6
 redis==5.0.1
+python-dotenv==1.0.1
