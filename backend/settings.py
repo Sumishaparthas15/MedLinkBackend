@@ -12,6 +12,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY not found. Set it in environment variables.")
+print("SECRET_KEY LOADED:", bool(SECRET_KEY))
+
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['*']  # Or restrict to Render domain later
