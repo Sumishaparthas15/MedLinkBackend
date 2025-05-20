@@ -57,7 +57,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import viewsets, status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import viewsets, mixins
-from rest_framework_jwt.utils import jwt_decode_handler
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
