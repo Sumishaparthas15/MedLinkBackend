@@ -82,7 +82,7 @@ import os
 import datetime
 import razorpay
 import smtplib
-import openai 
+
 
 
 
