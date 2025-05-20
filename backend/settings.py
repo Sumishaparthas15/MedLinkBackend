@@ -20,7 +20,8 @@ if not SECRET_KEY:
 
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['*']  # Or restrict to Render domain later
+ALLOWED_HOSTS = ['medlinkbackend-zvjc.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 
