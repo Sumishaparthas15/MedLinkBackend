@@ -11,8 +11,8 @@ urlpatterns = [
     path('get-csrf-token/', views.get_csrf_token), 
 
 
-        path('generate-otp1/', GenerateOTPView1.as_view(), name='generate_otp'),
-        path('verify-otp1/', VerifyOTPView1.as_view(), name='verify_otp'),
+    path('generate-otp1/', GenerateOTPView1.as_view(), name='generate_otp'),
+    path('verify-otp1/', VerifyOTPView1.as_view(), name='verify_otp'),
 
     #hospital
    

@@ -163,10 +163,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Correct format without the trailing slash and path
-    "http://127.0.0.1:3000",  # Also include this if you're using 127.0.0.1 instead of localhost
+    "http://127.0.0.1:3000", 
+     "https://med-link-frontend-pi.vercel.app", # Also include this if you're using 127.0.0.1 instead of localhost
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",  # The URL of your React app
+    "http://localhost:3000", 
+     "https://med-link-frontend-pi.vercel.app", # The URL of your React app
 ]
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 # Password validation
